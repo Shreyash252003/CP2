@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <title>Document</title>
+
+    <style>
+       body {
+       
+        background-color: white;
+        color: black;
+        
+      }
+      .dark-mode {
+        background-color: rgb(252, 171, 113);
+        color: white;
+      }
+      
+      img{
+        width: 85px;
+      }
+    </style>
+
+</head>
+<body>
+  
+
+    <header class="text-gray-600 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+          <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <img src="/static/mainlogo.png">
+            <span class="ml-3 text-xl"><b><a href="/index"> Timely Taste </a> </b></span>
+          
+          <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+            <a class="mr-5 hover:text-gray-900" href="/services.html">Services</a>
+            <a class="mr-5 hover:text-gray-900" href="/pricing.html">Pricing</a>
+            <a class="mr-5 hover:text-gray-900" href="/contact">Contact us</a>
+            <a class="mr-5 hover:text-gray-900" href="/sign_in">Sign in/up</a>
+          </nav>
+          <button id="popcart" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" >Cart(<span id="cart">0</span>)   
+          </button>
+          <br>
+         
+        </div>
+      </header>
+
+      
+
+      <section class="text-gray-600 body-font">
+        <div class="container mx-auto flex px-5 py-7 items-center justify-center flex-col">
+          <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="Timely Taste logo" src="/static/sublogo-1.png">
+          <h2> Scroll Down </h2><span>&#8595;</span>
+        </div>
+      </section>
+      <br>
+
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-wrap w-full mb-20">
+            <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+              <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Items Available</h1>
+              <div class="h-1 w-20 bg-red-500 rounded"></div>
+            </div>
+            <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">Below mentioned all the all items are available on our canteen from 9am to 5pm and we are open to all for 6 day's a week.</p>
+          </div>
+          <div class="flex flex-wrap -m-4">
+            <div class="xl:w-1/4 md:w-1/2 p-4">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/bread_pakora.jpg" alt="content">
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Bread Pakora - 20Rs</h2>
+                <button id="bread_pakora" class="cart"> Add to Cart </button>
+              </div>
+            </div>
+            <div class="xl:w-1/4 md:w-1/2 p-4">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/dhokla.jpg" alt="content">
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Dhokla - 20Rs</h2>
+                 <button id="dhokla" class="cart">Add to Cart</button>
+              </div>
+            </div>
+            <div class="xl:w-1/4 md:w-1/2 p-4">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/aloo_paratha.webp" alt="content">
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Aloo Paratha - 50Rs</h2>
+                <button id="aloo_paratha" class="cart"> Add to Cart </button>
+              </div>
+            </div>
+            <div class="xl:w-1/4 md:w-1/2 p-4">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/samosa.jpg" alt="content">
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Samosa - 20Rs</h2>
+                 <button id="samosa" class="cart">  Add to Cart </button> 
+              </div>
+            </div>
+            <div class="xl:w-1/4 md:w-1/2 p-4">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/pineapple.jpg" alt="content">
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Pineapple Juice - 45Rs</h2>
+                <button id="pineapple_juice" class="cart">  Add to Cart </button>
+              </div>
+            </div>
+            <div class="xl:w-1/4 md:w-1/2 p-4">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/cmilkshake.jpg" alt="content">
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Chocolate Milkshake - 45Rs</h2>
+                <button id="chocolate_milkshake" class="cart">  Add to Cart </button> 
+              </div>
+            </div>
+            <div class="xl:w-1/4 md:w-1/2 p-4">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/mango_juice.jpg" alt="content">
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Mango Juice - 45Rs</h2>
+                 <button id="mango_juice" class="cart">  Add to Cart </button> 
+              </div>
+            </div>
+            <div class="xl:w-1/4 md:w-1/2 p-4">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/vada_pav.webp" alt="content">
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Vada Pav - 20Rs</h2>
+                <button id="vada_pav" class="cart">  Add to Cart </button>
+              </div>
+            </div>
+            <div class="xl:w-1/4 md:w-1/2 p-4">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/s_r.jpg" alt="content">
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Vada Pav - 20Rs</h2>
+                <button id="vada_pav" class="cart">  Add to Cart </button>
+              </div>
+            </div>
+            <div class="xl:w-1/4 md:w-1/2 p-4">
+              <div class="bg-gray-100 p-6 rounded-lg">
+                <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/vada_pav.webp" alt="content">
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Vada Pav - 20Rs</h2>
+                <button id="vada_pav" class="cart">  Add to Cart </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-col text-center w-full mb-20">
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Pricing</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">This Prices are not permanent may be change with time so please confirm the price of each item by visiting the shop.</p>
+          </div>
+          <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+            <table class="table-auto w-full text-left whitespace-no-wrap">
+              <thead>
+                <tr>
+                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">Item</th>
+                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Quantity</th>
+                  <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Price</th>
+                  <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="px-4 py-3">Sugar</td>
+                  <td class="px-4 py-3">1Kg</td>
+                  <td class="px-4 py-3 text-lg text-gray-900">38Rs</td>
+                  <td class="w-10 text-center">
+                    <input name="plan" type="radio">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-t-2 border-gray-200 px-4 py-3">Soya oil</td>
+                  <td class="border-t-2 border-gray-200 px-4 py-3">1 lit</td>
+                  <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">140Rs</td>
+                  <td class="border-t-2 border-gray-200 w-10 text-center">
+                    <input name="plan" type="radio">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-t-2 border-gray-200 px-4 py-3">Peanut</td>
+                  <td class="border-t-2 border-gray-200 px-4 py-3">1Kg</td>
+                  <td class="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">120Rs</td>
+                  <td class="border-t-2 border-gray-200 w-10 text-center">
+                    <input name="plan" type="radio">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Peanut oil</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">1 lit</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">170Rs</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
+                    <input name="plan" type="radio">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Milk</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">1 lit</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">50Rs</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
+                    <input name="plan" type="radio">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Yogurt</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">1 lit</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">60Rs</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
+                    <input name="plan" type="radio">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Butter Milk</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">1 lit</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">20Rs</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
+                    <input name="plan" type="radio">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Xerox copy</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">1 Copy</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">2Rs</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
+                    <input name="plan" type="radio">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Amul Icecream</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">1 Cup</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">10Rs</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
+                    <input name="plan" type="radio">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Amul Cone</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">1 cone</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">10Rs</td>
+                  <td class="border-t-2 border-b-2 border-gray-200 w-10 text-center">
+                    <input name="plan" type="radio">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
+            <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0"> <a href = "/error.html"> Learn More </a>
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </a>
+            <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Button</button> 
+          </div>
+        </div>
+      </section> -->
+      
+
+      
+
+      <footer class="text-gray-600 body-font">
+        <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+          <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+            <img src="/static/mainlogo.png">
+            <span class="ml-3 text-xl"><a href="/index.html"> Timely Taste</a></span>
+          </a>
+          <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2022 Timely Taste —
+            timelytaste333@gmail.com
+          </p>
+          <br>
+          <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">Created by <b>  S2 Group </b>
+          </p>
+          <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+            <a class="text-gray-500">
+              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+              </svg>
+            </a>
+            <a class="ml-3 text-gray-500">
+              <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+              </svg>
+            </a>
+            <a class="ml-3 text-gray-500">
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+              </svg>
+            </a>
+            <a class="ml-3 text-gray-500">
+              <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                <circle cx="4" cy="4" r="2" stroke="none"></circle>
+              </svg>
+            </a>
+          </span>
+        </div>
+      </footer>
+</body>
+
+{% block js %}
+<script>
+  console.log('working');
+  if (localStorage.getItem('cart') == null){
+  var cart = {};  
+  }
+  else{
+    cart = JSON.parse(localStorage.getItem('cart'));  
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+  }
+
+  $('.cart').click(function(){
+      console.log('clicked');
+      var idstr = this.id.toString();
+      console.log(idstr);
+      if(cart[idstr] != undefined){
+        cart[idstr] = cart[idstr] + 1;
+      }
+      else{
+        cart[idstr] = 1;
+      }
+      console.log(cart);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      document.getElementById('cart').innerHTML = Object.keys(cart).length;
+  });
+  tippy('#popcart', {
+    content: "Your Cart Item's",
+  });
+  
+  function updatePopover(){
+    console.log('the one who give the ');
+    var popStr = "";
+    popStr = popStr + "<h5>hi</h5> ";
+    var i = 1;
+    for (var item in cart){
+      popStr = popStr + "<b>" + i + "</b>";
+      popStr = popStr + document.getElementById(dhokla) + "Qty: " + cart[item] + '<br>';
+      i = i+1;
+    }
+    
+
+  }
+  
+  
+  </script>
+{% endblock %}
+
+</html>
