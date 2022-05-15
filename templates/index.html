@@ -53,12 +53,15 @@
             <a class="mr-5 hover:text-gray-900" href="/services.html">Services</a>
             <a class="mr-5 hover:text-gray-900" href="/pricing.html">Pricing</a>
             <a class="mr-5 hover:text-gray-900" href="/contact">Contact us</a>
+            {% if user.is_authenticated %}
+            <a class="mr-5 hover:text-gray-900" href="/logout">Log out</a>
+            {% else %}
             <a class="mr-5 hover:text-gray-900" href="/sign_in">Sign in/up</a>
+            {% endif %}
           </nav>
           <button id="popcart" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" >Cart(<span id="cart">0</span>)   
           </button>
           <br>
-         
         </div>
       </header>
 
@@ -68,6 +71,10 @@
         <div class="container mx-auto flex px-5 py-7 items-center justify-center flex-col">
           <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="Timely Taste logo" src="/static/sublogo-1.png">
           <h2> Scroll Down </h2><span>&#8595;</span>
+          {% if user.is_authenticated %}
+          <h4 style="font-family: cursive; color:palevioletred; font-weight: bold; font-size: 25px;">Hi! {{user.username}} Are you ready to eat?🍴🍴</h4>
+            
+          {% endif %}
         </div>
       </section>
       <br>
