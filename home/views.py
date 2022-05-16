@@ -44,7 +44,6 @@ def sign_up(request):
         return render(request,'sign_up.html')
 
 
-   
 
 
 def sign_in(request):

@@ -41,8 +41,7 @@
 
 </head>
 <body>
-  
-  <p>Hi</p>
+
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
           <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
@@ -53,11 +52,14 @@
             <a class="mr-5 hover:text-gray-900" href="/services.html">Services</a>
             <a class="mr-5 hover:text-gray-900" href="/pricing.html">Pricing</a>
             <a class="mr-5 hover:text-gray-900" href="/contact">Contact us</a>
+            {% if user.is_authenticated %}
+            <a class="mr-5 hover:text-gray-900" href="/logout">Logout</a>
+            {% else %}
             <a class="mr-5 hover:text-gray-900" href="/sign_in">Sign in/up</a>
+            {% endif %}
           </nav>
           
           <br>
-         
         </div>
       </header>
 
