@@ -10,6 +10,8 @@ urlpatterns = [
     path('logout',views.logout,name="logout"),
     path('hom',views.hom,name="hom"),
     path('product/<slug>',views.product,name="product"),
-    path("add-to-cart/<slug>",add_to_cart,name="add_to_cart")
+    path("add-to-cart/<slug>",add_to_cart,name="add_to_cart"),
+    path("remove-from-cart/<slug>",views.remove_from_cart,name="remove_from_cart"),
+
 
 ]
