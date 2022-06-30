@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse,redirect,get_object_or_404
 from home.models import Contact
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User, auth
 from django .contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -78,6 +79,18 @@ def hom(request):
     }
     return render(request ,"hom.html",context)
 
+def OrderSummary(request):
+    try:
+        context = {
+            'orders':Order.objects.get(user=request.user,ordered=False),
+        }
+        return render(request,'order_summary.html',context)
+    except ObjectDoesNotExist:
+        messages.error(request,"You do not have a active order")
+        return redirect("hom")
+
+    
+
 
 def product(request,slug):
     context = {
@@ -137,6 +150,7 @@ def remove_from_cart(request, slug):
         return redirect("home:product",slug=slug)
 
 
-
+def checkout(request):
+    return render(request,'checkout.html')
 
 
