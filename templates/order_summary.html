@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design Bootstrap</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static 'css/style.min.css'%}" rel="stylesheet">
+  <style type="text/css">
+    html,
+    body,
+    header,
+    .carousel {
+      height: 60vh;
+    }
+
+    @media (max-width: 740px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+  </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            th scope="col">Item title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Item price</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for order in orders.items.all %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{order.item.title}}</td>
+            <td>{{order.item.price}}</td>
+            <td>{{order.quantity}}</td>
+            <td>
+                {% if order.item.discount_price %}
+                ₹{{order.get_total_discount_item_quantity }}
+                <span class="badge badge-primary">(Saving ₹{{order.get_amount_saved}})</span>
+            {% else %}
+            ₹{{order.get_total_item_quantity }}
+            {% endif %}
+            </td>
+          </tr>
+          {%endfor%}
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><strong><em>Total::</em></strong></td>
+            <td>₹{{orders.get_total}}</td>
+          </tr>
+          <tr>
+            <td ><a href="/hom" class="btn btn-primary float-right">Continue Eating</a></td>
+            <td ><a href="/checkout" class="btn btn-warning float-right">Proceed to checkout</a></td>
+          </tr>
+        </tbody>
+      </table>
+</body>
