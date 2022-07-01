@@ -14,7 +14,9 @@ urlpatterns = [
     path("remove-from-cart/<slug>",views.remove_from_cart,name="remove_from_cart"),
     path("ordersum",views.OrderSummary,name="ordersum"),
     path("checkout",views.checkout,name="checkout"),
-    path("remove_single_item_from_cart/<slug>",views.remove_single_item_from_cart,name="remove_single_item_from_cart")
-
+    path("remove_single_item_from_cart/<slug>",views.remove_single_item_from_cart,name="remove_single_item_from_cart"),
+    path("payment", views.order_payment, name="payment"),
+    path("callback/", views.callback, name="callback"),
+    
 
 ]
