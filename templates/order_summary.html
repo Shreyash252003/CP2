@@ -63,7 +63,10 @@
             <th scope="row">{{forloop.counter}}</th>
             <td>{{order.item.title}}</td>
             <td>{{order.item.price}}</td>
-            <td>{{order.quantity}}</td>
+            <td><a href="{% url 'home:remove_single_item_from_cart' order.item.slug %}"><i class="fas fa-minus mr-2"></i></a>
+                {{order.quantity}}
+                <a href="{% url 'home:add_to_cart' order.item.slug %}"><i class="fas fa-plus ml-2"></i></a>
+            </td>
             <td>
                 {% if order.item.discount_price %}
                 ₹{{order.get_total_discount_item_quantity }}
@@ -71,9 +74,18 @@
             {% else %}
             ₹{{order.get_total_item_quantity }}
             {% endif %}
+            <a style="color:red" href="{% url 'home:remove_from_cart' order.item.slug%}">
+              <i class="fas fa-trash float-right"></i>
+            </a>
             </td>
           </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5">Your cart is empty</td>
+            <td ><a href="/hom" class="btn btn-primary float-right">Continue Eating</a></td>
+          </tr>
           {%endfor%}
+          {% if orders.get_total %}
           <tr>
             <td></td>
             <td></td>
@@ -82,9 +94,10 @@
             <td>₹{{orders.get_total}}</td>
           </tr>
           <tr>
-            <td ><a href="/hom" class="btn btn-primary float-right">Continue Eating</a></td>
+            <td ><a href="/hom" class="btn btn-primary float-right ml-2">Continue Eating</a></td>
             <td ><a href="/checkout" class="btn btn-warning float-right">Proceed to checkout</a></td>
           </tr>
+          {% endif %}
         </tbody>
       </table>
 </body>

@@ -123,7 +123,7 @@ def add_to_cart(request,slug):
         order = Order.objects.create(user=request.user,ordered_date=ordered_date)
         order.items.add(order_item)
         messages.info(request,"This item quantity was added to your cart")
-    return redirect("home:product",slug=slug)
+    return redirect("home:ordersum")
 
 
 def remove_from_cart(request, slug):
@@ -140,7 +140,34 @@ def remove_from_cart(request, slug):
             )[0]
             order.items.remove(order_item)
             messages.info(request,"This item was removed from your cart")
+            return redirect("home:ordersum")
+        else:
+            messages.info(request,"This item was not present in your cart")
             return redirect("home:product",slug=slug)
+    else:
+        #add a message saying the user doesnt have an order
+        messages.info(request,"The user has not placed an order yet")
+        return redirect("home:product",slug=slug)
+
+def remove_single_item_from_cart(request, slug):
+    item = get_object_or_404(Item,slug=slug)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        # Check if the order item is in the order
+        if order.items.filter(item__slug=item.slug).exists():
+            order_item=OrderItem.objects.filter(
+                item=item,
+                user=request.user,
+                ordered=False
+            )[0]
+            if order_item.quantity>1:
+                order_item.quantity-=1
+                order_item.save()
+            else:
+                order.items.remove(order_item)
+            messages.info(request,"This item quantity was updated")
+            return redirect("home:ordersum")
         else:
             messages.info(request,"This item was not present in your cart")
             return redirect("home:product",slug=slug)
