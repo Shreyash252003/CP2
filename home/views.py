@@ -1,13 +1,21 @@
+from multiprocessing import context
 from django.shortcuts import render, HttpResponse,redirect,get_object_or_404
 from home.models import Contact
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User, auth
 from django .contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Item,Order,OrderItem
+from .models import Item,Order,OrderItem, Payment
 from django.utils import timezone
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
+import razorpay
+from timely_taste.settings import RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET
+from timely_taste import settings
+from .constants import PaymentStatus
+from django.views.decorators.csrf import csrf_exempt
+import json
+
 
 # Create your views here.
 @login_required(login_url="/")
@@ -72,7 +80,7 @@ def logout(request):
 
 
 
-
+@login_required(login_url="/")
 def hom(request):
     context ={
         'items':Item.objects.all(),
@@ -91,7 +99,7 @@ def OrderSummary(request):
 
     
 
-
+@login_required(login_url="/")
 def product(request,slug):
     context = {
         'items':Item.objects.all(),
@@ -99,7 +107,7 @@ def product(request,slug):
     }
     return render(request,"product.html",context)
 
-
+@login_required(login_url="/")
 def add_to_cart(request,slug):
     item = get_object_or_404(Item,slug=slug)
     order_item,created = OrderItem.objects.get_or_create(
@@ -125,7 +133,7 @@ def add_to_cart(request,slug):
         messages.info(request,"This item quantity was added to your cart")
     return redirect("home:ordersum")
 
-
+@login_required(login_url="/")
 def remove_from_cart(request, slug):
     item = get_object_or_404(Item,slug=slug)
     order_qs = Order.objects.filter(user=request.user, ordered=False)
@@ -148,7 +156,7 @@ def remove_from_cart(request, slug):
         #add a message saying the user doesnt have an order
         messages.info(request,"The user has not placed an order yet")
         return redirect("home:product",slug=slug)
-
+@login_required(login_url="/")
 def remove_single_item_from_cart(request, slug):
     item = get_object_or_404(Item,slug=slug)
     order_qs = Order.objects.filter(user=request.user, ordered=False)
@@ -176,8 +184,76 @@ def remove_single_item_from_cart(request, slug):
         messages.info(request,"The user has not placed an order yet")
         return redirect("home:product",slug=slug)
 
-
+@login_required(login_url="/")
 def checkout(request):
-    return render(request,'checkout.html')
+    context={
+        'order':Order.objects.get(user=request.user,ordered=False)
+    }
+    
+    return render(request,'checkout.html',context)
+
+@login_required(login_url="/")
+def order_payment(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        amount = request.POST.get("tamount")
+        time = request.POST.get("time")
+        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+        razorpay_order = client.order.create(
+            {"amount": int(amount) * 100, "currency": "INR", "payment_capture": 1}
+        )
+        order = Payment.objects.create(
+            name=name, amount=amount, provider_order_id=razorpay_order["id"],time=time
+        )
+        order.save()
+        return render(
+            request,
+            "payment.html",
+            {
+                "callback_url": "http://" + "127.0.0.1:8000" + "razorpay/callback",
+                "razorpay_key": RAZORPAY_KEY_ID,
+                "order": order,
+                "id":razorpay_order,
+            },
+        )
+    return render(request, "payment.html")
+
+
+@login_required(login_url="/")
+@csrf_exempt
+def callback(request):
+    def verify_signature(response_data):
+        client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
+        return client.utility.verify_payment_signature(response_data)
+
+    if "razorpay_signature" in request.POST:
+        payment_id = request.POST.get("razorpay_payment_id", "")
+        provider_order_id = request.POST.get("razorpay_order_id", "")
+        signature_id = request.POST.get("razorpay_signature", "")
+        order = Payment.objects.get(provider_order_id=provider_order_id)
+        ord =Order.objects.get(user=request.user,ordered=False)
+        order.payment_id = payment_id
+        order.signature_id = signature_id
+        order.save()
+        if not verify_signature(request.POST):
+            order.status = PaymentStatus.SUCCESS
+            ord.ordered=True
+            ord.save()
+            order.save()
+            return render(request, "callback.html", context={"status": order.status})
+        else:
+            order.status = PaymentStatus.FAILURE
+            order.save()
+            return render(request, "callback.html", context={"status": order.status})
+    else:
+        payment_id = json.loads(request.POST.get("error[metadata]")).get("payment_id")
+        provider_order_id = json.loads(request.POST.get("error[metadata]")).get(
+            "order_id"
+        )
+        order = Payment.objects.get(provider_order_id=provider_order_id)
+        order.payment_id = payment_id
+        order.status = PaymentStatus.FAILURE
+        order.save()
+        return render(request, "callback.html", context={"status": order.status})
 
 

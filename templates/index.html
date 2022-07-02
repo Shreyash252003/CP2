@@ -50,17 +50,21 @@
             <span class="ml-3 text-xl"><b><a href="/index"> Timely Taste </a> </b></span>
           
           <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
-            <a class="mr-5 hover:text-gray-900" href="/services.html">Services</a>
-            <a class="mr-5 hover:text-gray-900" href="/pricing.html">Pricing</a>
+            
             <a class="mr-5 hover:text-gray-900" href="/contact">Contact us</a>
+
+            {% if user.is_authenticated %}
+            <a class="mr-5 hover:text-gray-900" href="/hom">Place Order</a>
+            {% else %}
+            <a href="/">sign in </a>
+            {% endif %}
             {% if user.is_authenticated %}
             <a class="mr-5 hover:text-gray-900" href="/logout">Log out</a>
             {% else %}
-            <a class="mr-5 hover:text-gray-900" href="/sign_in">Sign in/up</a>
+            <a class="mr-5 hover:text-gray-900" href="/">Sign in/up</a>
             {% endif %}
           </nav>
-          <button id="popcart" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" >Cart(<span id="cart">0</span>)   
-          </button>
+          
           <br>
         </div>
       </header>
@@ -86,77 +90,77 @@
               <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Most Ordered Items</h1>
               <div class="h-1 w-20 bg-red-500 rounded"></div>
             </div>
-            <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">Below mentioned all the all items are available on our canteen from 9am to 5pm and we are open to all for 6 day's a week.</p>
+            <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">These are the most order items from our menu.</p>
           </div>
           <div class="flex flex-wrap -m-4">
             <div class="xl:w-1/4 md:w-1/2 p-4">
               <div class="bg-gray-100 p-6 rounded-lg">
                 <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/bread_pakora.jpg" alt="content">
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Bread Pakora - 20Rs</h2>
-                <button id="bread_pakora" class="cart"> Add to Cart </button>
+                
               </div>
             </div>
             <div class="xl:w-1/4 md:w-1/2 p-4">
               <div class="bg-gray-100 p-6 rounded-lg">
                 <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/dhokla.jpg" alt="content">
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Dhokla - 20Rs</h2>
-                 <button id="dhokla" class="cart">Add to Cart</button>
+                 
               </div>
             </div>
             <div class="xl:w-1/4 md:w-1/2 p-4">
               <div class="bg-gray-100 p-6 rounded-lg">
                 <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/aloo_paratha.webp" alt="content">
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Aloo Paratha - 50Rs</h2>
-                <button id="aloo_paratha" class="cart"> Add to Cart </button>
+                
               </div>
             </div>
             <div class="xl:w-1/4 md:w-1/2 p-4">
               <div class="bg-gray-100 p-6 rounded-lg">
                 <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/samosa.jpg" alt="content">
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Samosa - 20Rs</h2>
-                 <button id="samosa" class="cart">  Add to Cart </button> 
+                
               </div>
             </div>
             <div class="xl:w-1/4 md:w-1/2 p-4">
               <div class="bg-gray-100 p-6 rounded-lg">
                 <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/pineapple.jpg" alt="content">
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Pineapple Juice - 45Rs</h2>
-                <button id="pineapple_juice" class="cart">  Add to Cart </button>
+               
               </div>
             </div>
             <div class="xl:w-1/4 md:w-1/2 p-4">
               <div class="bg-gray-100 p-6 rounded-lg">
                 <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/cmilkshake.jpg" alt="content">
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Chocolate Milkshake - 45Rs</h2>
-                <button id="chocolate_milkshake" class="cart">  Add to Cart </button> 
+                
               </div>
             </div>
             <div class="xl:w-1/4 md:w-1/2 p-4">
               <div class="bg-gray-100 p-6 rounded-lg">
                 <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/mango_juice.jpg" alt="content">
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Mango Juice - 45Rs</h2>
-                 <button id="mango_juice" class="cart">  Add to Cart </button> 
+                 
               </div>
             </div>
             <div class="xl:w-1/4 md:w-1/2 p-4">
               <div class="bg-gray-100 p-6 rounded-lg">
                 <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/vada_pav.webp" alt="content">
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Vada Pav - 20Rs</h2>
-                <button id="vada_pav" class="cart">  Add to Cart </button>
+                
               </div>
             </div>
             <div class="xl:w-1/4 md:w-1/2 p-4">
               <div class="bg-gray-100 p-6 rounded-lg">
                 <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/s_r.jpg" alt="content">
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Vada Pav - 20Rs</h2>
-                <button id="vada_pav" class="cart">  Add to Cart </button>
+                
               </div>
             </div>
             <div class="xl:w-1/4 md:w-1/2 p-4">
               <div class="bg-gray-100 p-6 rounded-lg">
                 <img class="h-40 rounded w-full object-cover object-center mb-6" src="/static/vada_pav.webp" alt="content">
                 <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Vada Pav - 20Rs</h2>
-                <button id="vada_pav" class="cart">  Add to Cart </button>
+                
               </div>
             </div>
           </div>
